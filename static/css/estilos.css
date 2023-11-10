@@ -1,0 +1,155 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+header h1{
+    color: white;
+    font-size: 50px;
+
+}
+.letras{
+    color: black;
+}
+
+body{
+    background-color: rgb(122, 4, 4);
+}
+header{
+   
+    height: 100px;
+    width: 100%;
+    background-color: rgb(241, 140, 162) ;
+    background: color #2e0313;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: solid 5px rgb(0, 12, 15);
+    font-family: 'Times New Roman';
+    position: fixed;
+}
+
+.margen-header{
+    width: 100%;
+    height: 100px;
+
+}
+  
+nav {
+    width: 40%;
+    height: 100px;
+     display: flex;
+     align-items: center;
+}
+
+ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+li{
+    list-style: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+li a {
+    width: 100%;
+    height: 100%;
+    padding: 20px 10px;
+    border-bottom:solid 2px white ;
+    color: rgb(0, 0, 0);
+    transition: .2s ease;
+}
+li a:hover{
+    background-color: white;
+}
+li a:active{
+    background-color: orange;
+}
+main{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+section{
+    height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.intro{
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+
+}
+.intro h1{
+    text-align: center;
+    width: 80%;
+    padding-bottom: 100px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+section[id="caballeros"]{
+    margin: 10px;
+    background-color: rgb(22, 22,22);
+    color: white;
+    border-radius: 10px;
+    font-family: 'Times New Roman', Times, serif;
+}
+#Damas{
+    margin: 10px;
+    background-color: rgb(187, 80, 85);
+    border-radius: 10px;
+}
+
+section h1{
+   
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Cinzel', serif;
+    font-family: 'Sacramento',;
+    width: 100%;
+    border-radius: 100px 100px 0 0;
+}
+.contenedor{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.contenedor p{
+    width: 50%;
+    text-align: center;
+    font-family:'Times New Roman' ;
+    font-size: 30px;
+    color: black;
+}
+.contenedor img{
+    width: 480px;
+    height: 580px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 7px  rgba(9,8, 8, 0.4);
+
+}
+
+footer{
+    height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+    font-family: 'Courier New', Courier, monospace;
+}
