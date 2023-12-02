@@ -48,7 +48,7 @@
               <td class="button-container">
               <a href="/update/<%= producto.producto_id%>"> <button class="button">Actualizar</button></a>
               <a href="/delete/<%= producto.producto_id%>"><button class="button delete" id="delete">Eliminar</button></a>
-              <a href="/addImagen">Imagen</a>
+              <a href="/addImagen/<%= producto.producto_id%>">Imagen</a>
              </td>
             </tr>
            <%}%>
