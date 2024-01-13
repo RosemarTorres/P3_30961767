@@ -1,7 +1,3 @@
-@font-face{
-	font-family:'Gamer';
-	src:url('/fuentes/Gamer.ttf');
-}
 
 *{
 margin:0;
@@ -14,7 +10,7 @@ h1{
  line-height:100px;
  font-weight:bold;
  color:white;
- font:50px 'Gamer';
+ 
 }
 body{
 	background-image:url('https://media.istockphoto.com/id/1320260102/es/vector/iconos-de-activos-dibujados-a-lo-largo-de-la-ruta-del-juego-de-mesa.jpg?s=612x612&w=0&k=20&c=IeM6q_ZYpNh3M5pJprDYk59ECUOoyUEFhPRKbQC7VOo');
