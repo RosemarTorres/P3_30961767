@@ -7,54 +7,67 @@
     <meta name= "description" content="pagina de enseñanza"/>
     <meta name="keywords" content="html5,javascript,diseño web"/>
     <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/update.css">
+    <link rel="stylesheet" type="text/css" href="/css/registro.css">
+    <link rel="icon" type="image/x-icon" href="img/perla.png" />
    <title>Update</title>
 </head>
- <h1 id="crear">Agregar Producto</h1>
 
+ <div class="container">
 <form action="/addPost" method="post">
-<div class='flex-principal'>
+<div class="row">
 <!------------------------------------------->
+<div class="col">
 <div id="editorcentrall">
+    <h3 class="title" style="text-align: center;">Agregar Producto</h3>
 <!------------------------------------------>
-<label for="nombre">Nombre</label>
+<div class="inputBox">
+<span for="nombre">Nombre</span>
 
 <input type="text" autofocus name="nombre" placeholder="Nombre" />
-
+</div>
 <!------------------------------------------>
-
-<label for="codigo">Codigo</label>
+<div class="inputBox">
+<span for="codigo">Codigo</span>
 
 <input name="codigo" type="number" placeholder=" Codigo" />
-
+</div>
 <!--------------------------------------------->
-
-<label for="precio">Precio</label>
+<div class="inputBox">
+<span for="precio">Precio</span>
 <input type="number" name="precio" placeholder=" Precio">
-
+</div>
 <!----------------------------------------------------->
-<label for="descripcion">Descripcion</label>
+<div class="inputBox">
+<span for="descripcion">Descripcion</span>
 <input type="text" name="descripcion" placeholder=" Descripcion">
-
+</div>
 <!----------------------------------------------------->
-<label for="calidad">Calidad</label>
+<div class="inputBox">
+<span for="calidad">Calidad</span>
 <input type="text" name="calidad" placeholder=" Calidad">
+</div>
 <!----------------------------------------------------->
-<label for="cantidad">Cantidad</label>
+<div class="inputBox">
+<span for="cantidad">Cantidad</span>
 <input type="number" name="cantidad" placeholder=" Cantidad">
+</div>
 <!--------------------------------------------------->
-
+<div class="inputBox">
+<span for="categoria">Categoria</span>
+<input type="categoria" name="categoria" placeholder=" Categoria" >
+</div>
 <!----------------------------------------------------->
 </div>
 
 <!------------------------------------------->
 <div id="cancelar">
-	<input type="submit" value="Agregar" id="update">
-    <a href="/productos" id="botonProductos">Volver</a>
-</div>
+	<input type="submit"  class="submit-btn" value="Agregar" id="update">
+    <p><a href="/productos"><img style='width:15%;display: flex; left: -10px;padding-top: 1.4rem;'  src="/img/cerrar-sesion.png" id='add'></a></p>
 
 </div>
+
 </form>
+</div>
 </body>
 <%- include('footer') -%>
 </html>

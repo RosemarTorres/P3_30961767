@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <title>Productos</title>
   <link rel="stylesheet" type="text/css" href="/css/producto.css">
+  <link rel="icon" type="image/x-icon" href="img/perla.png" />
+
   
 </head>
 <body>
@@ -14,9 +16,10 @@
         <ul>
         
          <li><a href="/">Inicio</a></li>
+         <li><a href="/usuarios">Usuarios</a></li>
            <li><a href="/add">Agregar Producto</a></li>
           <li><a href="/categorias">Categorías</a></li>
-          
+          <li><a href="/compras">Compras</a></li>
              <li><a href="/login">Login </a></li>     
 
         </ul>
@@ -24,8 +27,8 @@
   
 </header>
   <h1>Productos <%=modelo.length%></h1>
-  <div class="table">
-    <table border>
+  <div >
+    <table class="table-desktop">
           <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -34,7 +37,8 @@
             <th>Descripcion</th>
             <th>Calidad</th>
             <th>Cantidad</th>
-            <th>Editar</th>
+            <th>Categoría</th>
+            <th style="text-align: center;">Editar</th>
           </tr>
           <%for(const producto of modelo){%>
             <tr>
@@ -45,10 +49,11 @@
               <td><%=producto.descripcion%></td>
               <td><%=producto.calidad%></td>
               <td><%=producto.cantidad%></td>
+              <td><%= producto.categoria_id %></td>
               <td class="button-container">
               <a href="/update/<%= producto.producto_id%>"> <button class="button">Actualizar</button></a>
               <a href="/delete/<%= producto.producto_id%>"><button class="button delete" id="delete">Eliminar</button></a>
-              <a href="/addImagen">Imagen</a>
+              <a href="/addImagen/<%= producto.producto_id%>">Imagen</a>
              </td>
             </tr>
            <%}%>

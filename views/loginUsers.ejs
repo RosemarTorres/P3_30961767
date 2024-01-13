@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/iniciosesion.css" rel="stylesheet" />
+    <title>Inicio Sesión</title>
+   
+  
+</head>
+
+<body>
+    
+    
+    
+    
+   
+    <form action="/loginUsers" method="post" class="form">
+        <h2 class="form_tittle">Inicia Sesión</h2>
+            <p class="form_paragraph">Aun no tienes una cuenta? <a href="/registroUsers" class="form_link">Entra aquí</a></p>
+
+            <div class="form_container">
+                <div class="form_group">
+                    <input type="email" name="email" id="email" class="form_input" placeholder=" " required>
+                    <label for="email" class="form_label">Correo Electrónico</label>
+                    <span class="form_line"></span>
+                </div>
+            </div>
+           
+            <div class="form_container">
+                <div class="form_group">
+                    <input type="password" name="password" id="password" class="form_input" placeholder=" " required>
+                    <label for="password" class="form_label">Contraseña</label>
+                    <span class="form_line"></span>
+                </div>
+                <input type="submit" class="form_submit"  value="Iniciar" id='enviar'>
+            </div>
+        <p><a href="/"><img style='width:15%;display: flex; left: -10px;padding-top: 1.4rem;'  src="/img/cerrar-sesion.png" id='add'></a></p> 
+    </form>
+</body>
+</html>

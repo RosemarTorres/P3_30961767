@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Agregar usuarios </title>
+	<link rel="stylesheet" type="text/css" href="/css/registro.css">
+	
+	<link rel="icon" type="image/x-icon" href="img/perla.png" />
+</head>
+<body>
+
+
+<div class="container">
+
+    <form action="/addUser" method="post">
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">Agregar Usuario</h3>
+
+                <div class="inputBox">
+                    <span>Nombre:</span>
+                    <input type="text" placeholder="nombre">
+                </div>
+				<div class="inputBox">
+                    <span>Apellido:</span>
+                    <input type="text" placeholder="Apellido">
+                </div>
+                <div class="inputBox">
+                    <span>Correo :</span>
+                    <input type="email" placeholder="Correo">
+                </div>
+                <div class="inputBox">
+                    <span>Cédula :</span>
+                    <input type="number" placeholder="Cédula">
+                </div>
+                <div class="inputBox">
+                    <span>Contraseña :</span>
+                    <input type="password" placeholder="Contraseña">
+                </div>
+					
+		<div style='display:flex;' id='selectinput'>
+			<input type="submit" class="submit-btn" value='agregar'>
+			<input type="button" class="submit-btn" value='cancelar' onclick="volver()">
+		</div>
+		</div>
+	</form>
+	<script type="text/javascript">
+		function volver(){
+			window.location.href='/usuarios';
+		}
+	</script>
+               
+            </div>
+
+    </form>
+
+</div>    
+    
+</html>
