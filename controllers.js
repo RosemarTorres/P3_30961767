@@ -15,8 +15,8 @@ app.use(express.static(__dirname+'/static'));
 app.set('view engine','ejs');//definimos el motor de plantilla con archivos ejs
 app.set('views',path.join(__dirname,"./views"));//definimos la ruta del motor de plantilla
 app.use(express.urlencoded({extended:false}));//permite recuperar los valores publicados en un request
-port = app.listen(4000);
-console.log('Servidor corriendo exitosamente en el puerto 4000');
+port = app.listen(3000);
+console.log('Servidor corriendo exitosamente en el puerto 3000');
 
 
 
