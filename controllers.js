@@ -1,22 +1,79 @@
+// -*- coding: utf-8 -*-
 //Librerias y dependencias
-require('dotenv').config();
-const http = require('http');
-const express = require('express');
-const app = express();
+const cookieParser = require('cookie-parser');
 const path = require('path');
-const baseDatosModels = require('./models/baseDeDatos.js');
-const {PASSWORD,ADMIN} = process.env;
-let login= false;
+require('dotenv').config();
+var handlebars = require('express-handlebars')
+const Recaptcha = require('express-recaptcha').RecaptchaV2;
+const recaptcha = new Recaptcha('6Lc0Vj4pAAAAAMeMxjfWh0RvjW2RgjI3zWN529V-', '6Lc0Vj4pAAAAAIyzQNYV1Y1kQhTicFKxmgfwwPU0');
+const multer = require('multer');
+const http = require('http');
+const { obtenerDireccionIP} = require('./middleware/direccionIP.js');
+const express = require('express');
+
+const app = express();
+
+//Configuracion socket.io para las notificaciones realTime
+
+const server = http.createServer(app);
+
+const {Server} = require('socket.io');
+
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+
+console.log('Un usuario se ha conectado');
+
+socket.emit('mensajeServer', '¡Hola, cliente!');
+
+socket.on('disconnect',()=>{
+
+console.log('un usuario se ha desconectado');
+
+});
+
+});
+
 //recursos que se van a cargar en el server 
 app.use(express.static(__dirname+'/static'));
 
-//-----------------------------------------------------------------
 //Configuración del Servidor
 app.set('view engine','ejs');//definimos el motor de plantilla con archivos ejs
 app.set('views',path.join(__dirname,"./views"));//definimos la ruta del motor de plantilla
 app.use(express.urlencoded({extended:false}));//permite recuperar los valores publicados en un request
-port = app.listen(3000);
-console.log('Servidor corriendo exitosamente en el puerto 3000');
+
+app.use(cookieParser());
+app.use(express.json());
+app.use(obtenerDireccionIP);
+const jwt = require('jsonwebtoken');
+const bodyParser= require('body-parser');
+//app.use(bodyParser.urlencoded({extended: true}));
+
+const baseDatos = require('./models/bd.js');
+const utils = require('./middleware/uploadImg.js');
+//middleware para verificar cliente
+const {verifyToken} = require('./middleware/JWT.js');
+//middleware para verificar admin
+const {verifyToken2} = require('./middleware/JWT2.js');
+//Variables de entorno
+const {PASSWORD,ADMIN,port,secretKey2} = process.env;
+let ext;
+//---------------------------------------------------------------
+
+//--------------------------------------------------------------
+let storage = multer.diskStorage({
+
+  destination: function (req, file, cb) {
+    cb(null, './static/uploads')
+  },
+  filename: function (req, file, cb) {
+    ext = path.extname(file.originalname);
+    cb(null, file.fieldname + '-' + Date.now() + utils.getContentType(ext))
+  }
+});
+
+let upload = multer({ storage: storage });
 
 
 
@@ -35,84 +92,222 @@ app.post('/login',(req,res)=>{
 
  const {admin,password} = req.body;
 
+ const dato= {
+  admin,
+  password
+ }
+
    if(admin === ADMIN && password === PASSWORD){
-    login=true;
+    const token = jwt.sign(dato,secretKey2,{expiresIn:60 * 60 * 24});
+   // Guardar token en cookies
+    res.cookie('token2', token, { httpOnly: true, secure: true });
     res.redirect('/productos');
    }else{
-    login=false;
-    res.redirect('/iniciarSesion');
+   res.json({ERROR:'Contraseña o usuario incorrecto vuelve a intentarlo'});
    }
 
 });
   
 
-app.get('/add',(req,res)=>{
+app.get('/add',verifyToken2,(req,res)=>{
 res.render('add.ejs');
 });
 
 //---------------------------------------------------------
-app.get('/addImagen',(req,res)=>{
-res.render('addImagen.ejs');
+app.get('/addImagen/:id',verifyToken2,(req,res)=>{
+baseDatos.getImagen(req,res);
 });
 
 
-app.post('/addImagen',(req,res)=>{
-baseDatosModels.aggIMG(req,res);
+app.post('/addImagen/:id',upload.single('img'),(req,res)=>{ 
+baseDatos.aggIMG(req,res);
 });
 
 
 app.post('/addPost',(req,res)=>{   
-baseDatosModels.aggDato(req,res);
+baseDatos.aggDato(req,res);
 });
 
 
-app.get('/productos',(req,res)=>{
-  baseDatosModels.mostrarProductos(req,res);
+app.get('/productos',verifyToken2,(req,res)=>{
+  baseDatos.mostrarProductos(req,res);
 });
 //-------------------------------------------------------
 // GET /editar/:id
-app.get('/update/:id',(req, res) => {
-baseDatosModels.mostrarUpdate(req,res);
+app.get('/update/:id',verifyToken2,(req, res) => {
+baseDatos.mostrarUpdate(req,res);
 
 });
 //-------------------------------------------------------
 // POST /editar/:id
 app.post('/update/:id', (req, res) => {
- baseDatosModels.update(req,res);
+ baseDatos.update(req,res);
 });
 //-------------------------------------------------------
 // GET /eliminar/:id
-app.get('/delete/:id', (req, res) => {
- baseDatosModels.mostrarDelete(req,res);
+app.get('/delete/:id',verifyToken2,(req, res) => {
+ baseDatos.mostrarDelete(req,res);
 });
 //-------------------------------------------------------
 // POST /eliminar/:id
 app.post('/delete/:id', (req, res) => {
- baseDatosModels.deletee(req,res);
+ baseDatos.deletee(req,res);
 });
 //------------------------------------------------------
-app.get('/categorias', (req, res) => {
- baseDatosModels.getCategorias(req,res);
+app.get('/categorias',verifyToken2,(req, res) => {
+ baseDatos.getCategorias(req,res);
 });
 //-------------------------------------------------------
-app.get('/addCategorias', (req, res) => {
+app.get('/addCategorias',verifyToken2,(req, res) => {
  res.render('addcategoria.ejs');
 });
 //-------------------------------------------------------
 app.post('/addcategorias', (req, res) => {
- baseDatosModels.postCategorias(req,res);
+ baseDatos.postCategorias(req,res);
 });
 //-------------------------------------------------------
-app.get('/updateCategoria/:id',(req,res)=>{
- baseDatosModels.mostrarUpdateC(req,res);
+app.get('/updateCategoria/:id',verifyToken2,(req,res)=>{
+ baseDatos.mostrarUpdateC(req,res);
 });
 //-------------------------------------------------------
 app.post('/updateCategoria/:id',(req,res)=>{
-baseDatosModels.updateCateg(req,res);
+baseDatos.updateCateg(req,res);
+});
+//-------------------------------------------------------
+app.get('/eliminarCategoria/:id',verifyToken2,(req,res)=>{
+baseDatos.deleteCategoriaGET(req,res);
+})
+//-------------------------------------------------------
+app.get('/clientes',verifyToken,(req,res)=>{
+  console.log('mostrando pagina la cliente!');
+baseDatos.ClientesGET(req,res);
+})
+//-------------------------------------------------------
+app.post('/cliente',(req, res) => {
+ baseDatos.filtrar(req,res);
+});
+//-------------------------------------------------------
+app.get('/clientico',verifyToken,(req, res) => {
+ baseDatos.filtrar2(req,res);
+});
+//-------------------------------------------------------
+app.get('/detalles/:id',verifyToken,(req,res)=>{
+baseDatos.detalles(req,res);
+});
+//-------------------------------------------------------
+app.get('/ruta', (req, res) => {
+  const {nombre,codigo,precio,descripcion,calidad,cantidad,url} = req.query;
+
+  let datos = {
+    nombre:nombre,
+    codigo:codigo,
+    precio:precio,
+    descripcion:descripcion,
+    calidad:calidad,
+    cantidad:cantidad,
+    url:url
+  }
+  
+  console.log(datos,'Valor de Busqueda');
+  res.render('buscar.ejs',{result:datos});
+
+});
+//-------------------------------------------------------
+app.get('/loginUsers',(req,res)=>{
+baseDatos.loginUsers(req,res);
+});
+//------------------------------------------------------
+app.post('/loginUsers',(req,res)=>{
+  baseDatos.postLoginCliente(req,res);
+})
+//------------------------------------------------------
+app.get('/registroUsers',(req,res)=>{
+  baseDatos.registroUsers(req,res);
+});
+//------------------------------------------------------
+app.post('/registroUsuariosPost',recaptcha.middleware.verify,(req,res)=>{
+
+
+   if(!req.recaptcha.error){
+    // El reCAPTCHA se ha verificado correctamente
+     baseDatos.registroUsuariosPost(req,res); 
+  } else{
+    // El reCAPTCHA no se ha verificado correctamente
+    res.send('Debes validar el Recaptcha');
+  } 
+})
+//------------------------------------------------------
+app.get('/comprar/:id',obtenerDireccionIP,verifyToken,(req,res)=>{
+  res.clearCookie('transaccion');
+  baseDatos.comprar(req,res);
+});
+//------------------------------------------------------
+app.post('/comprarPost',async (req,res)=>{
+baseDatos.comprarPOST(req,res);
+})
+//------------------------------------------------------
+app.get('/transaction',(req,res)=>{
+const transaction = req.cookies.transaccion;
+console.log('transaction desde controllers',transaction);
+ res.json({transaction}); 
+});
+//------------------------------------------------------
+app.get('/eliminarTransaction',(req,res)=>{
+ res.clearCookie('transaccion');
+ res.json({message:'transaccion eliminada'});
+})
+//------------------------------------------------------
+app.get('/usuarios',(req,res)=>{
+baseDatos.mostrarUsers(req,res);
+})
+//------------------------------------------------------
+//------------------------------------------------------
+app.get('/compras',(req,res)=>{
+baseDatos.MostrarCompras(req,res);
+})
+//------------------------------------------------------
+app.get('/addUser',(req,res)=>{
+baseDatos.addUsers(req,res);
+})
+//------------------------------------------------------
+app.post('/addUser',(req,res)=>{
+  baseDatos.addUsersPost(req,res);
+})
+//------------------------------------------------------
+app.get('/updateUser/:id',(req,res)=>{
+baseDatos.updateUser(req,res);
+})
+//------------------------------------------------------
+app.post('/updateUser/:id',(req,res)=>{
+baseDatos.updateUserPost(req,res);
+})
+//------------------------------------------------------
+app.get('/deleteUser/:id',(req,res)=>{
+baseDatos.deleteUser(req,res);
+});
+//------------------------------------------------------
+app.get('/deleteCompra/:id',(req,res)=>{
+baseDatos.deleteCompra(req,res);
+})
+//------------------------------------------------------
+//logout cliente
+app.get('/logout',(req, res) => {
+  //metodo para borrar la cookie
+  res.clearCookie('token');
+  res.redirect('/');
+});
+//------------------------------------------------------
+//logout administrador
+app.get('/logout2',(req, res) => {
+  res.clearCookie('token2');
+  res.redirect('/');
 });
 //-------------------------------------------------------
 //Metodo para manejar rutas no encontradas
 app.get('/*',(req,res)=>{
-res.render('notfound.ejs')
+res.render('notfound.ejs');
 });
 //-------------------------------------------------------
+server.listen(port,()=>{
+  console.log(`Servidor corriendo exitosamente en el puerto ${port}`);
+});
