@@ -368,7 +368,7 @@ app.post('/recuperarPassword',(req,res)=>{
   baseDatos.enviarEmailRecuperacion(req,res);
   });
   //------------------------------------------------------
-app.get('/restablecer-contrasena',(req,res)=>{  
+app.get('/restablecer',(req,res)=>{  
 
   const token = req.query.token;
   const UserName = req.query.userName;
