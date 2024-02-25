@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<body>
+<head>
+    <meta charset="utf-8">
+    <meta charset="iso-8559-1"/>
+    <meta name= "description" content="pagina de enseñanza"/>
+    <meta name="keywords" content="html5,javascript,diseño web"/>
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/registro.css">
+    
+    <link rel="icon" type="image/x-icon" href="img/perla.png" />
+   <title>Update</title>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X3TGNSS1QD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X3TGNSS1QD');
+</script>
+</head>
+
+ <div class="container">
+<form action="/addPost" method="post">
+<div class="row">
+<!------------------------------------------->
+<div class="col">
+<div id="editorcentrall">
+    <h3 class="title" style="text-align: center;">Agregar Producto</h3>
+<!------------------------------------------>
+<div class="inputBox">
+<span for="nombre">Nombre</span>
+
+<input type="text" autofocus name="nombre" placeholder="Nombre" />
+</div>
+<!------------------------------------------>
+<div class="inputBox">
+<span for="codigo">Codigo</span>
+
+<input name="codigo" type="number" placeholder=" Codigo" />
+</div>
+<!--------------------------------------------->
+<div class="inputBox">
+<span for="precio">Precio</span>
+<input type="number" name="precio" placeholder=" Precio">
+</div>
+<!----------------------------------------------------->
+<div class="inputBox">
+<span for="descripcion">Descripcion</span>
+<input type="text" name="descripcion" placeholder=" Descripcion">
+</div>
+<!----------------------------------------------------->
+<div class="inputBox">
+<span for="calidad">Calidad</span>
+<input type="text" name="calidad" placeholder=" Calidad">
+</div>
+<!----------------------------------------------------->
+<div class="inputBox">
+<span for="cantidad">Cantidad</span>
+<input type="number" name="cantidad" placeholder=" Cantidad">
+</div>
+<!--------------------------------------------------->
+<div class="inputBox">
+<span for="categoria">Categoria</span>
+<input type="categoria" name="categoria" placeholder=" Categoria" >
+</div>
+<!----------------------------------------------------->
+</div>
+
+<!------------------------------------------->
+<div id="cancelar">
+	<input type="submit"  class="submit-btn" value="Agregar" id="update">
+    <p><a href="/productos"><img style='width:15%;display: flex; left: -10px;padding-top: 1.4rem;'  src="/img/cerrar-sesion.png" id='add'></a></p>
+
+</div>
+
+</form>
+</div>
+</body>
+<%- include('footer') -%>
+</html>

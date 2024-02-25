@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="<%= og.description %>">
+  <meta property="og:title" content="<%= og.title %>">
+  <meta property="og:description" content="<%= og.description %>">
+  <meta property="og:image" content="<%= og.image %>">
+		<link rel="icon" type="image/x-icon" href="img/perla.png" />
+        <title>Buscar Joyería la Elegancia </title>
+        <!-- Favicon-->
+		  <link href="/css/clientes.css" rel="stylesheet" />
+        <!-- Font Awesome icons (free version)-->
+        <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X3TGNSS1QD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X3TGNSS1QD');
+</script>
+        <!-- Google fonts-->
+		<style type="text/css">
+			@font-face
+			{
+			   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+				   src:url(/fuentes/HyperSuperFast.ttf);
+				  }
+				
+			   img{
+				   width:25%;
+				   height: auto;
+				   margin:20px;
+			   }
+			   #contenedor{
+				   display:flex;
+				   justify-content: center;
+				width: 80%;
+				margin:70px auto;
+			   }
+			  
+		.divContenedor2{
+			display:flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			border:1px solid white;
+			width:20%;
+			background:rgba(255, 255, 255, 0);
+		}
+		 @media screen and (max-width: 720px){
+		 	img{
+			width:100%;
+			height: auto;
+		}
+		.divContenedor2{
+			display:flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			border:1px solid white;
+			width:60%;
+			background:rgba(0, 0, 0, 0);
+		}
+		h1{
+			     display: flex;
+			     justify-content: center;
+			     align-items:center;
+           font:2rem 'dali';
+           color:rgb(67, 250, 248);
+           text-shadow:40px 20px 50px rgb(135, 215, 233);
+           width:70%;
+           margin:50px auto;
+        }
+		 }
+	</style>
+		    <!--Schema Markup-->
+ <script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Article",
+		"headline": "Joyería",
+		"datePublished": "2024-02-3",
+		"author": {
+		  "@type":"Person",
+		  "name": "Rosemar Torres"
+		},
+		"publisher":{
+		  "@type": "Organization",
+		  "name": "Joyería La ELegancia",
+		  "logo": {
+			"@type": "ImageObject",
+			"url": "https://cdn-icons-png.flaticon.com/512/7945/7945044.png" 
+		  }
+		},
+		"image": {
+		  "@type": "ImageObject",
+		  "url": "https://i0.wp.com/blog.retif.es/wp-content/uploads/cuerda.jpg",
+		  "width": "800",
+		  "height": "600"
+		},
+		"description": "Joyas y accesorios de la mejor calidad"
+	  }
+  </script>
+		   
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+      
+    </head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+		<header>
+			
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResposive" aria-controls="navbarResponsive" aria-label="Toggle navigation">
+				<a class="nav-link" href="/clientes">Volver</a>
+				<i class="fas fa-bars ms-1"></i>
+			</button>
+		   
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+					
+					
+					<li class="nav-item"><a class="nav-link" href="/clientes">Volver</a></li>
+				</ul>
+			</div>
+		</header>
+
+	</nav>
+	<br>
+	<br>
+	<br>
+<br>
+<br>
+<br>
+<br>
+<h2>Detalles del Producto</h2>
+   <div id='contenedor'>
+  <% for(let rose = 0;rose < imagenes.length;rose++){ %>
+	<div class="divContenedor2">
+   <img  src="<%= imagenes[rose].url%>">
+ 
+  <div style='display:flex;flex-direction: column;justify-content: center;align-items: center;'>
+	<p><strong>Nombre :</strong><%= imagenes[rose].nombre%></p>
+	<p><strong>Codigo :</strong><%= imagenes[rose].codigo%></p>
+	<p><strong>Precio :</strong><span style='color:rgb(28, 150, 53)'><%= imagenes[rose].precio%>$</span></p>
+	<p><strong>Descripcion :</strong><%= imagenes[rose].descripcion%></p>
+	<p><strong>Calidad :</strong><%= imagenes[rose].calidad%></p>
+	<p><strong>Cantidad :</strong><%= imagenes[rose].cantidad%></p>
+	<p><strong>Categoria :</strong><%= imagenes[rose].categoria_id%></p>
+	</div>
+ 
+   </div> 
+   <% } %>
+   </div>
+   
+
+</body>
+</html>
+
+
+
+
+
+
+<style type="text/css">
+	@font-face{
+	   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		   src:url(/fuentes/HyperSuperFast.ttf);
+		  }
+	   img{
+		   width:150%;
+		   height: auto;
+		   margin:20px;
+	   }
+	   #contenedor{
+		   display:flex;
+		   justify-content: center;
+		width: 80%;
+		margin:70px auto;
+	   }
+   
+   </style>

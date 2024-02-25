@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Login</title>
+	<link rel="stylesheet" type="text/css" href="/css/iniciosesion.css">
+	<link rel="icon" type="image/x-icon" href="img/perla.png" />
+	 <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X3TGNSS1QD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X3TGNSS1QD');
+</script>
+</head>
+<body>
+ 
+<div id="login">
+
+	<form class="form" action="/login" method="post">
+<h1 class="form_tittle">Inicio de Sesion</h1>
+		<div class="form_container">
+			<div class="form_group">
+				<input type="text" name="admin"  class="form_input" placeholder=" " required>
+				<label for="admin" class="form_label">Admin</label>
+				<span class="form_line"></span>
+			</div>
+		</div>
+	
+		<div class="form_container">
+			<div class="form_group">
+				<input type="text" name="password"  class="form_input" placeholder=" " required>
+				<label for="password" class="form_label">Password</label>
+				<span class="form_line"></span>
+
+			</div>
+		</div>
+	
+			<input style="margin-top: 20%;"  type="submit"  class="form_submit" name="enviar" value="Login" id='iniciar'>	
+
+			<p><a href="/"><img style='width:15%;display: flex; left: -10px;padding-top: 1.4rem;'  src="/img/cerrar-sesion.png" id='add'></a></p>
+	</form>
+</div>
+</body>
+</html>
+
+
+	
+	

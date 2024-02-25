@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="<%= og.description %>">
+  <meta property="og:title" content="<%= og.title %>">
+  <meta property="og:description" content="<%= og.description %>">
+  <meta property="og:image" content="<%= og.image %>">
+	<link rel="stylesheet" type="text/css" href="/css/registro.css">
+	<link rel="icon" type="image/x-icon" href="img/perla.png" />
+	<title>Compra</title>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-X3TGNSS1QD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-X3TGNSS1QD');
+</script>
+	
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Joyería",
+            "datePublished": "2024-02-3",
+            "author": {
+              "@type":"Person",
+              "name": "Rosemar Torres"
+            },
+            "publisher":{
+              "@type": "Organization",
+              "name": "Joyería La ELegancia",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://cdn-icons-png.flaticon.com/512/7945/7945044.png" 
+              }
+            },
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://i0.wp.com/blog.retif.es/wp-content/uploads/cuerda.jpg",
+              "width": "800",
+              "height": "600"
+            },
+            "description": "Joyas y accesorios de la mejor calidad"
+          }
+        </script>
+</head>
+<body>
+
+
+<div class="container">
+
+    <form  action="/comprarPost" method='post'>
+
+        <div class="row">
+
+            <div class="col">
+
+                <h3 class="title">Datos</h3>
+
+                <div class="inputBox">
+                    <span>Nombre de usuario:</span>
+                    <input type="text" placeholder=" Nombre"  name="nombre_de_usuario" value='<%= resultado.nombre_usuario%>' readonly>
+                </div>
+                <div class="inputBox">
+                    <span>Apellido :</span>
+                    <input type="text" name="apellido" value="<%= resultado.apellido%>" readonly placeholder="Apellido">
+                </div>
+                <div class="inputBox">
+                    <span>Cédula :</span>
+                    <input type="number" name="cedula" value='<%=ip.cedula%>' placeholder="Cédula" readonly >
+                </div>
+                <div class="inputBox">
+                    <span>Producto :</span>
+					<input type="text" name="telefono" value='<%= resultado.nombre%>' readonly>
+                </div>
+				<div class="inputBox">
+                    <span>Descripción:</span>
+					<input type="text" name="descripcion" value='<%=resultado.descripcion%>' readonly>
+                </div>
+				<div class="inputBox">
+                    <span>Cliente_ID :</span>
+					<input type="number" name="cliente_id" value='<%= resultado.id%>' readonly>
+                </div>
+				<div class="inputBox">
+                    <span>Producto_ID :</span>
+					<input type="number" name="producto_id" value='<%= resultado.producto_id%>' readonly>
+                </div>
+				<div class="inputBox">
+                    <span>Cantidad :</span>
+					<input type="number" name="cantidad" value='1' id='cantidad'>
+                </div>
+				<div class="inputBox">
+                    <span>	Total pagado :</span>
+				<input type="number" name="total_pagado" value='<%= resultado.precio%>' id='Total_pagado' readonly>
+                </div>
+				<div class="inputBox">
+                    <span>Código :</span>
+					<input type="number" name="codigo" value="<%=resultado.codigo%>" readonly>
+                </div>
+              
+
+            </div>
+
+            <div class="col">
+
+                <h3 class="title">Pago</h3>
+
+                <div class="inputBox">
+                    <span>	Método de pago :</span>
+                    <img src="/img/card_img.png" alt="">
+					<select name='currency'>
+						<option></option>
+						<option value="USD">USD</option>
+						<option value="EUR">EUR</option>
+						<option value="VES">VES</option>
+					</select>
+                </div>
+                <div class="inputBox">
+                    <span>Dirreción IP :</span>
+                    <input type="text" name="ip_cliente" value='<%= ip.ipAddress%>' readonly>
+                </div>
+                <div class="inputBox">
+                    <span>Número de Tarjeta :</span>
+					<select name='numeroT' required>
+						<option value=""></option>
+						<option value='4111111111111111'>4111111111111111</option>
+						<option value='5555555555554444'>5555555555554444</option>
+						<option value='378282246310005'>378282246310005</option>
+						<option value='6011111111111117'>6011111111111117</option>
+						<option value='3530111333300000'>3530111333300000</option>
+						<option value='30569309025904'>30569309025904</option>
+					</select>
+                    <input type="number" placeholder="1111-2222-3333-4444">
+                </div>
+                <div class="inputBox">
+                    <span>Mes de vencimiento :</span>
+					<input type="number" name="mesV" min="1" max="12" step="1" placeholder="mes" required>
+                </div>
+
+                <div class="flex">
+                    <div class="inputBox">
+                        <span>Año de vencimiento:</span>
+                        <input type="number" min="1900" max="2099" step="1" placeholder="Año" name="year" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>Cvv :</span>
+						<input type="number" name="cvv" placeholder="clave" min="1" max="999" step="1" id='clave' required>
+                    </div>
+                </div>
+
+            </div>
+    
+        </div>
+		<div class="flex">
+        <input type="submit"  class="submit-btn" value="Confirmar">
+		<input type="button" >
+		
+		<p value="Cancelar" onclick="redireccionar()"><img style='width:15%;display: flex; left: -5px;padding-top: 1.4rem;'  src="/img/boton-eliminar.png" id='add'></p>
+  		 </div>
+	</form>
+
+	
+
+</div>    
+
+<script type="text/javascript">
+
+    function redireccionar(){
+        window.location.href='/clientes';
+    }
+
+    let clave = document.getElementById('clave');
+    clave.addEventListener('input',()=>{
+        if(clave.value > 999){
+            clave.value=999;
+        }
+    })
+
+
+    let cantidad = document.getElementById('cantidad');
+
+    let total_pagado = document.getElementById('Total_pagado');
+
+    const valorInicial = total_pagado.value;
+
+    cantidad.addEventListener('input',function(){
+        if(cantidad.value < 1){
+            cantidad.value=1;
+        }
+        total_pagado.value = cantidad.value * valorInicial;
+    });
+</script>
+
+
+
+</body>
+
+
+</html>
