@@ -64,15 +64,15 @@
 	</div>
 	<div class="form_container">
 		<div class="form_group">
-			<input type="password" name="password" id="password" class="form_input" placeholder=" " required>
-			<label for="email" class="form_label">Contraseña nueva</label>
+			<input type="password" name="password" id='password-1' class="form_input" placeholder=" " required>
+			<label for="password" class="form_label">Contraseña nueva</label>
 			<span class="form_line"></span>
 		</div>
 		
 	</div>
 	<div class="form_container">
 		<div class="form_group">
-			<input type="password" name="passwordC"  class="form_input" placeholder=" " required>
+			<input type="password" name="passwordC"  id='password-2' class="form_input" placeholder=" " required>
 			<label for="password" class="form_label">Confirmar contraseña</label>
 			<span class="form_line"></span>
 		</div>
@@ -89,10 +89,23 @@
 </form>
 
 
-<script type="text/javascript">
+
+	<script type="text/javascript">
 	function login(){
 		window.location.href='/loginUsers';
 	}
+	let myForm = document.getElementById('myForm');
+  
+  myForm.addEventListener('submit',(e)=>{
+    let password = document.getElementById('password-1');
+    let passwordd = document.getElementById('password-2');
+
+  if(password.value !== passwordd.value){
+  e.preventDefault();
+  alert('Las contraseñas no coinciden , vuelve a intentarlo');
+  }
+   
+  });
 </script>
 </body>
 </html>
